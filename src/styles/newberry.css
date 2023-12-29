@@ -1,0 +1,191 @@
+* {
+    scroll-behavior: smooth !important;
+    box-sizing: border-box;
+    transition: 250ms;
+}
+
+html,
+body {
+    margin: 0;
+    line-height: inherit;
+    padding: 0;
+}
+
+html {
+    --flame: 241, 97, 81;
+    --park-green: 32, 84, 62;
+    --tile: 146, 88, 64;
+    --sapphire: 64, 81, 163;
+    --lake: 126, 196, 226;
+    --mulberry: 173, 43, 90;
+    --lavender: 205, 184, 209;
+    --midnight: 17, 26, 42;
+    --granite: 234, 235, 231;
+    --sand: 234, 220, 201;
+    --angle: 70deg;
+    --dist: 66%;
+
+    /* for dark mode button */
+    --color-light: rgb(var(--bg-color-1));
+    --color-dark: rgb(var(--fg-color-1));
+  
+}
+
+:root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(45deg,
+            rgb(var(--accent)),
+            rgb(var(--accent-light)) 30%,
+            white 60%);
+
+    --splash-color: var(--park-green);
+    --bg-color-1: var(--granite);
+    --bg-color-2: var(--lavender);
+    --fg-color-1: var(--midnight);
+    --fg-color-2: var(--lake);
+}
+
+.dark {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(45deg,
+            rgb(var(--accent)),
+            rgb(var(--accent-light)) 30%,
+            white 60%);
+
+    --splash-color: var(--lavender);
+    --fg-color-1: var(--granite);
+    --fg-color-2: var(--lavender);
+    --bg-color-1: var(--midnight);
+    --bg-color-2: var(--sapphire);
+}
+
+/* color assignments */
+
+body {
+  background: rgb(var(--bg-color-1));
+  color: rgb(var(--fg-color-1));
+}
+
+a {
+  color: rgb(var(--fg-color-1));
+}
+a:hover, a:focus, a:active, a:visited {
+  color: rgba(var(--fg-color-1), 0.77);
+}
+
+/* fonts */
+
+@font-face {
+    font-family: "flecha";
+    src: url("/fonts/FlechaM-Regular.woff");
+}
+
+@font-face {
+    font-family: "flecha";
+    src: url("/fonts/FlechaM-Bold.woff");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "flecha";
+    src: url("/fonts/FlechaM-Black.woff");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "styrene";
+    src: url("/fonts/StyreneB-Regular-Web.woff");
+}
+
+@font-face {
+    font-family: "styrene-bold";
+    src: url("/fonts/StyreneB-Bold-Web.woff");
+}
+
+@font-face {
+    font-family: "signifier";
+    src: url("/fonts/signifier-regular.woff2");
+}
+
+@font-face {
+    font-family: "signifier-bold";
+    src: url("/fonts/signifier-bold.woff2");
+}
+
+h1,
+h2 {
+    font-family: "flecha";
+}
+
+h3,
+h4,
+h5,
+h6,
+dt {
+    font-family: "styrene";
+}
+
+body,
+html {
+    font-family: "signifier";
+}
+
+b {
+    font-family: "styrene-bold";
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: min(10vh, 13vw);
+    line-height: min(10vh, 13vw);
+}
+
+a:not(no-lines)  {
+    font-weight: 700;
+    line-height: 1rem;
+    text-decoration: none;
+    background: linear-gradient(to right,
+            rgba(var(--fg-color-1), 0.33),
+            rgba(var(--fg-color-1), 0.33)),
+        linear-gradient(to right,
+            rgba(var(--fg-color-1), 0.77),
+            rgba(var(--fg-color-1), 0.77));
+    background-size:
+        100% 0.1rem,
+        0 0.1rem;
+    background-position:
+        100% 100%,
+        0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms;
+}
+
+a:not(no-lines):hover,
+a:not(no-lines):focus {
+    background-size:
+        0 0.1rem,
+        100% 0.1rem;
+}
+
+/* random global stuff */
+
+a {
+  text-decoration: none;
+}
+
+/* MEDIA QUERIES */
+/* sm */
+/* @media screen and (max-width: 767px) {} */
+
+/* med */
+/* @media screen and (min-width: 768px) and (max-width: 1023px) {} */
+
+/* lg */
+/* @media screen and (min-width: 1024px) {} */
