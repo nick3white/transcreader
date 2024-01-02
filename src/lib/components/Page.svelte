@@ -1,79 +1,103 @@
 <script lang="ts">
+  import {base } from '$app/paths'
   import { onMount } from 'svelte'
-  export let pageData
-  const { image, text, pageNo} = pageData
+  export let pageData,  itemid
+  $: ({ image, text, pageNo, title} = pageData)
 
-  onMount(() => {
-document.getElementById("page").onmousemove = function(e) {
-    document.getElementById("magnify").style.top = e.pageY*1 + "px";
-    document.getElementById("magnify").style.left = e.pageX*1 + "px";
-}
- })
 </script>
-<div class="container">
-  <div id="image-container" class="image">
-    <figure>
+<div class="book-container">
+    <div class="image-container" >
       <!-- <div id="magnifying-glass" style="background-image: url('https://collections.newberry.org/IIIF3/Image/{image}/full/max/0/default.jpg')"/> -->
-      <img class="magnifiedImg"  id="page-image" src="https://collections.newberry.org/IIIF3/Image/{image}/full/max/0/default.jpg" alt="" />
-      <figcaption>
-        <p>page {pageNo[0]} / {pageNo[1]}</p>
-      </figcaption>
-    </figure>
-  </div>
-  <div class="text">
+      <img class="page-image" src="https://collections.newberry.org/IIIF3/Image/{image}/full/600,/0/default.jpg" alt="" />
+    </div>
+  <div class="text-container">
     {#if pageNo[0] === 0}
       <h1>{text}</h1>
+      <p>description</p>
     {:else }
-      <p>
+      <h1>{title}</h1>
+      <p class="transc-text">
         {text}
       </p>
     {/if}
+        <div class="page-nav">
+          <a href="{base}/rest/{itemid}/{pageNo[0] - 1 < 1 ? 0 : pageNo[0] - 1}" class="back nav-btn">
+          <!-- <a href="{base}/id/{itemid}/{pageNo[0] - 1 < 1 ? 0 : pageNo[0] - 1}" class="back nav-btn"> -->
+
+<img src="{base}/arrow-left.svg" alt="" />
+      </a>
+          <div class="current">
+        {#if pageNo[0] === 0}
+        cover page; {pageNo[1]} pages total
+        { :else }
+        page {pageNo[0]} of {pageNo[1]}
+{/if}
+      </div>
+          <a href="{ base }/rest/{ itemid }/{ pageNo[0] + 1 }" class="fwd nav-btn" >
+          <!-- <a href="{ base }/id/{ itemid }/{ pageNo[0] + 1 }" class="fwd nav-btn" > -->
+<img src="{base}/arrow-left.svg" alt="" />
+      </a>
+        </div>
   </div>
 </div>
 
 <style>
-
-.magnify{
+  .nav-btn {
+  color: rgb(var(--bg-color-2));
+  background: rgb(var(--fg-color-2));
   border-radius: 50%;
-  border: 2px solid black;
-  position: absolute;
-  z-index: 20;
-  background-repeat: no-repeat;
-  background-color: white;
-  box-shadow: inset 0 0 20px rgba(0,0,0,.5);
-  display: none;
-  cursor: none;
-}
+  transition: all 100ms ease-in-out;
 
+background: linear-gradient(145deg, rgba(var(--bg-color-2), 1), rgba(var(--bg-color-2), 0.5));
+  }
+  .nav-btn, .nav-btn img {
 
-  figure, img {
-  position: relative;
+  width: 33px;
+  height: 33px;
   }
-#page-image::before {
-content: "";
-position: absolute;
-top: 0;
-left: 0;
-width: 100px;
-height: 100px;
-background: transparent;
-}
-  .container {
-  display: flex;
-  height: 100%;
-  max-height: 90vh;
-  overflow: hidden;
+  .fwd img{
+  transform: rotate(180deg);
   }
-  #page-image {
-  height: 85vh;
-  object-fit: contain;
+  .nav-btn:hover {
+background: linear-gradient(145deg, rgba(var(--bg-color-2), 0.5), rgba(var(--bg-color-2), 1));
+  
   }
-  .text {
+  .image-container, .text-container {
+    flex: 1;
+  }
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(90vh - 100px);
+  }
+    img { 
+    max-height: 100%;
+    object-fit: cover;
+    height: calc(90vh - 100px);
+  }
+  .book-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(90vh - 100px);
+    margin: 10px 10px 0 10px;
+  }
+  .text-container {
+    height: calc(90vh - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .transc-text {
   padding: 33px;
-
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  }
+  .page-nav {
+  width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
   }
 </style>
