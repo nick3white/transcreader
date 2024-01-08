@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Transcription Reader</title>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+    <link
+      rel="stylesheet"
+      href="newberry.css"
+    />
+  <script src="dark-mode-toggle.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/universalviewer@4.0.0/dist/uv.css"
+    />
+    <script
+      type="application/javascript"
+      src="https://cdn.jsdelivr.net/npm/universalviewer@4.0.0/dist/umd/UV.js"
+    ></script>
+    <style>
+      #uv {
+        width: 75vw;
+        height: 95vh;
+      }
+    </style>
+  </head>
+  <body>
+    <dark-mode-toggle></dark-mode-toggle>
+    <div class="uv" id="uv"></div>
+
+    <script>
+      async function getTransc(pageNo){
+        // needs token ?
+        const url = `https://collections.newberry.org/API/PackageExtractor/v1.0/Extract?Package=${"2KXJ8Z44DMZ5"}&PackageFields=Title,MediaEncryptedIdentifier,Document.IIIFV3ID&RepresentativeFields=MediaEncryptedIdentifier,MaxWidth,MaxHeight&ContentFields=MediaEncryptedIdentifier,CoreField.IIIFResourceType,new.User-Generated-Transcription,MaxWidth,MaxHeight&format=json`
+        const transc = await fetch(url)
+      }
+      var urlAdapter = new UV.IIIFURLAdapter();
+
+      var data = {
+        manifest: "https://collections.newberry.org/IIIF3/Presentation/Manifest/2KXJ8Z44DMZ5",
+        embedded: true, // needed for codesandbox frame
+        collectionIndex:
+          urlAdapter.get("c") !== undefined
+            ? Number(urlAdapter.get("c"))
+            : undefined,
+        manifestIndex: Number(urlAdapter.get("m", 0)),
+        canvasIndex: Number(urlAdapter.get("cv", 0)),
+        rotation: Number(urlAdapter.get("r", 0)),
+        rangeId: urlAdapter.get("rid", ""),
+        xywh: urlAdapter.get("xywh", ""),
+        target: urlAdapter.get("target", "")
+      };
+
+      var uv = UV.init("uv", data);
+
+      // normally you would call
+      // urlAdapter.bindTo(uv);
+      // which then handles events internally
+      // but here we're handling them ourselves instead
+
+      uv.on(
+        "collectionIndexChange",
+        function (collectionIndex) {
+          urlAdapter.set("c", collectionIndex);
+        },
+        false
+      );
+
+      uv.on(
+        "manifestIndexChange",
+        function (manifestIndex) {
+          urlAdapter.set("m", manifestIndex);
+        },
+        false
+      );
+
+      uv.on(
+        "canvasIndexChange",
+        function (canvasIndex) {
+        console.log(canvasIndex)
+          urlAdapter.set("cv", canvasIndex);
+        },
+
+        false
+      );
+
+      uv.on(
+        "rangeChange",
+        function (rangeId) {
+          urlAdapter.set("rid", rangeId);
+        },
+        false
+      );
+
+      uv.on("targetChange", function (target) {
+        urlAdapter.set("xywh", urlAdapter.getFragment("xywh", target));
+      });
+    </script>
+  </body>
+</html>

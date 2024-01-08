@@ -3,7 +3,7 @@
   import { page } from "$app/stores"
   import { onMount } from 'svelte'
   import { base } from '$app/paths'
-  import {moveMagnifier} from '$lib'
+  // import {moveMagnifier} from '$lib'
   import Navipages from '$comps/Navipages.svelte'
 
   let img, glass, w, h, bw
@@ -23,22 +23,22 @@
   //
   // }
 
-  onMount(() => {
-    img = document.getElementById('page-image');
-    glass = document.getElementById('magnifying-glass');
-    glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
-    bw = 3
-    w = glass.offsetWidth / 2;
-    h = glass.offsetHeight / 2;
-
-    glass.addEventListener("mousemove", (e) => moveMagnifier(e, w, h, img, glass, bw, zoom ));
-    img.addEventListener("mousemove", (e) => moveMagnifier(e, w, h, img, glass, bw, zoom ));
-    // img.addEventListener("mousemove", moveMagnifier);
-
-    glass.addEventListener("touchmove", (e) => moveMagnifier(e, w, h, img, glass, bw, zoom ));
-    img.addEventListener("touchmove", (e) => moveMagnifier(e, w, h, img, glass, bw, zoom ));
-    // img.addEventListener("touchmove", moveMagnifier);
-  })
+  // onMount(() => {
+  //   img = document.getElementById('page-image');
+  //   glass = document.getElementById('magnifying-glass');
+  //   glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+  //   bw = 3
+  //   w = glass.offsetWidth / 2;
+  //   h = glass.offsetHeight / 2;
+  //
+  //   glass.addEventListener("mousemove", (e) => moveMagnifier(e, w, h, img, glass, bw, zoom ));
+  //   img.addEventListener("mousemove", (e) => moveMagnifier(e, w, h, img, glass, bw, zoom ));
+  //   // img.addEventListener("mousemove", moveMagnifier);
+  //
+  //   glass.addEventListener("touchmove", (e) => moveMagnifier(e, w, h, img, glass, bw, zoom ));
+  //   img.addEventListener("touchmove", (e) => moveMagnifier(e, w, h, img, glass, bw, zoom ));
+  //   // img.addEventListener("touchmove", moveMagnifier);
+  // })
 
 </script>
 {#if pageNo !== 0}
@@ -47,7 +47,6 @@
 {/if}
 <div class="book-container">
   <div class="image-container" >
-    <div id="magnifying-glass" style="background-image: url('https://collections.newberry.org/IIIF3/Image/{currentPage.image}/full/max/0/default.jpg')"/>
     <img  class="page-image" id="page-image" src="https://collections.newberry.org/IIIF3/Image/{currentPage.image}/full/600,/0/default.jpg" alt="" />
   </div>
   <div class="text-container">

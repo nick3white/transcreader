@@ -8,7 +8,7 @@ const indexPeUrl = [
 ];
 const itemPeUrl = [
   'https://collections.newberry.org/API/PackageExtractor/v1.0/Extract?Package=',
-  '&PackageFields=Title&RepresentativeFields=MediaEncryptedIdentifier,MaxWidth,MaxHeight&ContentFields=MediaEncryptedIdentifier,CoreField.IIIFResourceType,new.User-Generated-Transcription,MaxWidth,MaxHeight&format=json'
+  '&PackageFields=Title,MediaEncryptedIdentifier,Document.IIIFV3ID&RepresentativeFields=MediaEncryptedIdentifier,MaxWidth,MaxHeight&ContentFields=MediaEncryptedIdentifier,CoreField.IIIFResourceType,new.User-Generated-Transcription,MaxWidth,MaxHeight&format=json'
 ];
 
 export async function getItem(id: string, key: string) {
@@ -22,6 +22,8 @@ export async function getItem(id: string, key: string) {
 
   const item = {
     title: itemApiData.APIResponse.Title,
+    apiurl: itemApiUrl,
+    iiifurl: itemApiData.APIResponse["Document.IIIFV3ID"],
     cover: {
       image: itemApiData.APIResponse.Representative.MediaEncryptedIdentifier,
       width: itemApiData.APIResponse.Representative.MaxWidth,
