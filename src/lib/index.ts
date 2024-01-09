@@ -2,9 +2,9 @@
 import type { CortexItemData } from './types';
 export const sampleItem = '2KXJ8Z44DMZ5';
 
-const indexPeUrl = [
+export const indexPeUrl = [
   'https://collections.newberry.org/API/PackageExtractor/v1.0/Extract?Package=',
-  '&PackageFields=SystemIdentifier,Title,new.Context,Link,new.Link-2&RepresentativeFields=SystemIdentifier,MediaEncryptedIdentifier,Title,MaxWidth,MaxHeight&ContentFields=SystemIdentifier,MediaEncryptedIdentifier,Title,CoreField.IIIFResourceType&format=json'
+  '&PackageFields=SystemIdentifier,Title,new.Context,Link,new.Link-2&RepresentativeFields=SystemIdentifier,MediaEncryptedIdentifier,Title,MaxWidth,MaxHeight&ContentFields=SystemIdentifier,MediaEncryptedIdentifier,Title,CoreField.IIIFResourceType,RecordID&format=json'
 ];
 const itemPeUrl = [
   'https://collections.newberry.org/API/PackageExtractor/v1.0/Extract?Package=',
